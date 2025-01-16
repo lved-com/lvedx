@@ -1,0 +1,514 @@
+/* RESET & BASE */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote,
+pre, a, abbr, acronym, address, big, cite,
+code, del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, b,
+u, i, center, dl, dt, dd, ol, ul, li, fieldset,
+form, label, legend, table, caption, tbody,
+tfoot, thead, tr, th, td, article, aside,
+canvas, details, embed, figure, figcaption,
+footer, header, hgroup, menu, nav, section {
+  margin: 0; padding: 0; border: 0;
+  vertical-align: baseline;
+  font-size: 100%;
+  font-family: "Trebuchet MS", sans-serif;
+}
+article, aside, figcaption, figure, footer,
+header, hgroup, menu, nav, section {
+  display: block;
+}
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote::before, blockquote::after, q::before, q::after { content: ''; content: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  overflow-wrap: normal;
+}
+html {
+  background: linear-gradient(180deg, #D0F0E4 100px, #F3F7F8 500px, #F6F8FA 100%);
+  color: #202122;
+}
+
+body {
+  margin: 0 auto;
+  word-wrap: break-word;
+  max-width: 48rem; /* main content width */
+}
+
+img {
+  max-width: 100vw;
+}
+
+/* HEADINGS & TEXT */
+h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin: 1rem 0 1.5rem;
+}
+
+section p {
+  display: block;
+  white-space: pre-wrap;
+  font-size: 1rem;
+  padding-block: 0rem;
+}
+section p {
+  padding-inline: clamp(0rem, 5vw, 1rem);
+}
+section span {
+  padding-top: 1rem;
+}
+section p + p, section img + p {
+  padding-bottom: 1rem;
+}
+section.parts p:nth-of-type(even) {
+  background: #131415;
+  color: #eee;
+}
+section.parts p:nth-of-type(even) a {
+  color: #fff;
+}
+section img {
+  width: 100%;
+  max-height: 16em;
+  object-fit: cover;
+  object-position: center;
+}
+section.parts p:nth-of-type(2) {
+  display: flex; /* breaks style below 100px */
+  flex-wrap: wrap;
+  align-items: center; /* vertically center content */
+  justify-content: space-around;
+}
+section.parts img.right {
+  width: clamp(12rem, 40%, 100%);
+  aspect-ratio: 3/4;
+}
+
+p.btn {
+  text-align: center;
+}
+button:hover {
+  background-color: #2874A6;
+}
+button {
+  background-color: #2E86C1;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 1em auto;
+}
+
+ul {
+  display: flex; /* breaks style below 100px */
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  margin: 0 auto;
+}
+ul h3 {
+  display: block;
+  margin: 0;
+  width: 100%;
+}
+ul li {
+  display: block;
+  font-size: xx-large;
+  padding-left: 0.5rem;
+}
+ul li:nth-of-type(1), ul li p {
+  font-size: medium;
+  padding-bottom: 1em;
+}
+ul li p {
+  padding-left: 0;
+}
+
+a {
+  color: #000;
+  color: var(--link-color, #000);
+}
+
+/* FULL-BLEED NAV & FOOTER */
+main, footer {
+  display: block;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  box-sizing: border-box;
+  padding: clamp(0.1rem, 1vw, 1rem);
+}
+
+main {
+  background: linear-gradient(#131415, #333), url('city.svg') top/cover no-repeat;
+  background-blend-mode: overlay;
+  border-bottom: 1px solid #444;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  word-break: normal;
+}
+
+main h1 {
+  font-size: 1.3em; /* Increase text size slightly */
+  font-weight: 800;
+  color: #025F60;
+  margin: 0 0 1rem 0;
+  text-align: center;
+  line-height: 2.01; /* Tight line-height to keep elements closer together */
+  margin-bottom: 0px;
+  display: block;
+  width: 100%;
+  padding: 0.1rem;
+  background: #131415;
+}
+
+main h1 a {
+  text-decoration: none;
+  font-size: clamp(0.7rem, 6vw, 1.3em);
+  border: 0;
+  border-radius: 0;
+  margin: 0;
+  color: #eee;
+}
+
+main h1 a img {
+  vertical-align: middle; /* helps align with text baseline */
+  max-height: 1.3em; /* scale image to roughly font-size of text */
+}
+
+nav a {
+  display: inline-block; /* breaks style below 100px */
+  color: #eee;
+  background-color: #131415;
+  border: 2px solid #777;
+  border-radius: 1000px;
+  font-weight: 600;
+  font-size: clamp(0.5rem, 5vw, 1em);
+  margin: 0.31rem;
+  white-space: break-spaces;
+  padding: clamp(1px, 0.5em, 1rem);
+  text-decoration: none;
+}
+nav a:hover, h2 a:hover {
+  color: #eee; 
+}
+
+/* FOOTER */
+footer {
+  background: #131415;
+  color: #aaa;
+  margin-top: 2rem;
+  border-top: 1px solid #333;
+  text-align: center;
+  white-space: break-spaces;
+}
+
+footer > * {
+  max-width: 70rem;
+  margin: 0 auto;
+  padding:clamp(0.1rem,1vw,1rem);
+}
+
+/* first two p side-by-side */
+footer p:nth-of-type(1),
+footer p:nth-of-type(2) {
+  display:inline-block; /* breaks style below 100px */
+  vertical-align:top;
+  box-sizing:border-box;
+}
+
+/* third p takes full width */
+footer p:nth-of-type(3) {
+  display:block;
+  width:100%;
+}
+
+footer a {
+  color: #fff;
+}
+footer a:hover {
+  color: #ccc;
+}
+footer small {
+  font-size: 50%;
+  white-space: pre-wrap;
+  margin: 0;
+  max-width: unset;
+}
+footer aside small {
+  display: block;
+}
+
+/* ASIDE TEXT INVISIBLE BUT SELECTABLE */
+aside {
+  color: #131415;
+  user-select: text;
+}
+
+:root {
+  --link-color: #000;
+}
+
+/* dark mode theme based on media */
+@media (prefers-color-scheme: dark) {
+  html {
+    background: #202122;
+    color: #d0f0e4;
+  }
+}
+
+/* Force dark theme */
+html[data-theme="dark"] {
+  background: #202122;
+  color: #d0f0e4;
+  --link-color: #eee;
+}
+
+/* Force light theme */
+html[data-theme="light"] {
+  background: linear-gradient(180deg, #D0F0E4 100px, #F3F7F8 500px, #F6F8FA 100%);
+  color: #202122;
+  --link-color: #000;
+}
+
+div {
+  width: fit-content;
+}
+label.theme {
+  float: right;
+  border: 0;
+  background-clip: text;
+  cursor: pointer;
+}
+main label.theme {
+  padding: 0.5rem;
+}
+label.theme p:nth-of-type(2), label.theme p:nth-of-type(3) {
+  padding: 0;
+  display: none;
+}
+
+h2 {
+  background: #131415cc;
+  color: #fff;
+  text-align: center;
+  padding-top: 0.5vw;
+  padding-bottom: 0.5vw;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding: clamp(0.1rem, 1vw, 1rem);
+  margin-top: 5rem;
+}
+h2 a {
+  color: #fff;
+}
+
+section h3 {
+  overflow-wrap: normal; /* breaks style below 100px */
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+h3, h3 p {
+  font-size: 1.7rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  white-space: break-spaces;
+}
+h3 img {
+  float: left;
+  margin: 0 1rem 1rem 0; /* add some spacing around the image */
+  max-width: 40%; /* ensures image doesn’t dominate on small screens */
+  min-width: 50px; /* minimum page width */
+  height: auto;
+}
+
+h4 {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  padding-top: 2em;
+}
+
+iframe {
+  display: block;
+  margin: 1rem auto;
+  border: 0;
+  aspect-ratio: 16/9;
+  max-height: 70vh;
+  width: clamp(2rem, 90vw, 48rem);
+}
+small {
+  display: flex; /* breaks style below 100px */
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  font-size: clamp(0.5rem, 2vw, 1rem);
+  margin: 1rem auto;
+  max-width: 20rem; /* optional limit */
+}
+small a {
+  white-space: normal;
+  word-break: break-all;
+}
+
+form {
+  display: flex;
+  margin: 2rem auto;
+  max-width: 30rem;
+  text-align: left;
+  padding: clamp(0.2rem, 1rem, 2rem);
+  background: var(--bg);
+  color: var(--fg);
+  border: 1px solid #444;
+  border-radius: 0.5rem;
+  flex-wrap: wrap;
+}
+
+button.secondary {
+  display: none;
+  background-color: grey;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.6rem;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: auto;
+}
+.success {
+  color: green;
+}
+.error {
+  color: red;
+}
+
+form p {
+  margin-bottom: 1rem;
+}
+
+form input, form textarea, form select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5em;
+  margin-top: 0.5em;
+  border: 1px solid #444;
+  border-radius: 0.5em;
+  font-size: 1rem;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+form input[type=submit] {
+  display: inline-block; /* breaks style below 100px */
+  background: #333;
+  color: #eee;
+  border: 1px solid #444;
+  border-radius: 1000px;
+  font-weight: 600;
+  font-size: clamp(0.8em, 5vw, 1em);
+  white-space: unset;
+  margin: 1rem 0;
+  padding: 0.4em 1em;
+  cursor: pointer;
+}
+
+form input[type=submit]:hover {
+  background: #4DD3C9;
+  color: #000;
+}
+
+/* Optional style for indicating mandatory fields */
+form [data-required]:after {
+  content:" *";
+  color:#f33;
+  font-weight:bold;
+}
+
+p.showonlyifscript {
+  display: none;
+}
+
+
+@media (max-width: 100px) { /* only to fix all weird issues with flex, inline, and overflow below 100px, by simply removing them, also enjoy the hack to improve form layout in such small screens */
+  form {
+    margin: 0;
+    padding: 0.1rem;
+  }  
+  section.parts p:nth-of-type(2) {
+    display: block;
+  }
+  ul {
+    display: block;
+  }
+  footer p:nth-of-type(1),
+  footer p:nth-of-type(2) {
+    display: block;
+  }
+  section h3 {
+    overflow-wrap: unset;
+  }
+  small {
+    display: block;
+  }
+  form input[type=submit] {
+    display: block;
+    padding: 0;
+  }
+  nav a {
+    display: block;
+  }
+}
+
+/* "main label" will be the ≡ menu by default, and unused if css checked doesn't work */
+main label.menu {
+  display: none;
+  padding: 1rem;
+  color: #eee;
+  background-color: #131415;
+  width: fit-content;
+  cursor: pointer; 
+}
+main nav label.menu { display: inline-block; }
+
+@supports (selector(:checked)) {  
+  nav { display: block; }
+  /* for starting with menu closed
+  main label.menu { display: block; }
+  nav { display: none; }
+     also need to modify the 2 toggle-menu lines below */
+
+  #toggle-menu:checked ~ nav { display: none; }
+  #toggle-menu:checked ~ label.menu { display: block; } /* handles just the less specific menu, outside of nav */
+
+  /* pure css theme switch still does not work - only the label/button toggle */
+  #toggle-theme:checked ~ label.theme p:nth-of-type(1) { display: none; }
+  #toggle-theme:checked ~ label.theme p:nth-of-type(2) { display: block; }
+}
+
+@supports (selector(:target)) {
+  section { display: none; }
+  section:nth-of-type(1) { display: block; }
+  body:has(:target:not(section:nth-of-type(1))) section.parts:nth-of-type(1) { display: none; }
+  section:target { display: block; }
+
+  #all:target ~ section { display: block; }
+}
+

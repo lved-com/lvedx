@@ -1,0 +1,23 @@
+{
+  "version": "0.1",
+  "manifest_version": 2,
+  "short_name": "LVED",
+  "name": "LVED",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#025F60",
+  "icons": [
+    {
+      "src": "logo🩷lved-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo🩷lved.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+
