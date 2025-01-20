@@ -1,271 +1,114 @@
-<!doctype html><!-- #troffhtml -->
-<meta charset="UTF-8">
+<!doctype html><!-- #ahoxushtml -->
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>lvedx + ahoxus zenith</title>
-<meta name="theme-color" content="#025f60">
-<link rel="manifest" href="manifest.json?v=20250120Z1026">
-<noscript>zenith needs javascript enabled to function, as it relies on secure random generation.</noscript>
+<title>lvedx spa/pwa example</title>
+<link rel="stylesheet" href="cognix.css?v=20250120Z1118">
+<meta name="theme-color" content="#025F60">
+<link rel="manifest" href="manifest.json?v=20250120Z1118">
 
-<style>
-p, article {
-	display: block;
-	white-space: pre-wrap;
-}
-@media print {
-  @page {
-    size: A4;
-    margin: 0;
-  }
-  *,
-  *:before,
-  *:after {
-    background: transparent !important;
-    color: #000 !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
-  a,
-  a:visited {
-    text-decoration: underline;
-  }
-  a[href]:after {
-    content: " (" attr(href) ")";
-  }
-  abbr[title]:after {
-    content: " (" attr(title) ")";
-  }
-  a[href^="#"]:after,
-  a[href^="javascript:"]:after {
-    content: "";
-  }
-  pre,
-  blockquote {
-    border: 1px solid #999;
-    page-break-inside: avoid;
-  }
-  thead {
-    display: table-header-group;
-  }
-  tr,
-  img {
-    page-break-inside: avoid;
-  }
-  img {
-    max-width: 100% !important;
-  }
-  video {
-    display: block;
-    margin: auto;
-  }
-  p,
-  h2,
-  h3 {
-    orphans: 3;
-    widows: 3;
-  }
-  h2,
-  h3 {
-    page-break-after: avoid;
-  }
-}
-pre,
-code {
-  font-family: Menlo, Monaco, "Courier New", monospace;
-}
-code {
-  overflow-x: scroll;
-}
-pre {
-  white-space-collapse: preserve-breaks;
-  text-wrap-mode: wrap;
-  text-wrap-style: pretty;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  hyphens: auto;
-  border-left: .2em dashed #ccc;
-  padding-left: .6em;
-  line-height: 1.3;
-}
-a,
-a:visited {
-  color: #3295db;
-}
-a:hover,
-a:focus,
-a:active {
-  color: #2695b7;
-}
-.modest-no-decoration {
-  text-decoration: none;
-}
-img,
-canvas,
-iframe,
-video,
-svg,
-select,
-textarea {
-  max-width: 100%;
-}
-*, html {
-  max-width: 100%;
-  font-size: 1rem;
-}
-body {
-  color: #444;
-  font-family: 'Open Sans Condensed', sans-serif;
-  font-weight: 300;
-  margin: 0 auto;
-  max-width: 48rem;
-  line-height: 1.45;
-  padding: .25rem;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: Arimo, Helvetica, sans-serif;
-}
-h1 {
-  border-bottom: 2px solid #fafafa;
-  margin-bottom: 1.15rem;
-  padding-bottom: .5rem;
-  font-size: 1.6rem;
-  text-align: center;
-}
-h2 {
-  font-size: 1.2rem;
-}
-h2,
-h3 {
-  margin-bottom: 1rem;
-  padding-bottom: .25rem;
-}
-blockquote {
-  border-left: 8px solid #fafafa;
-  padding: 1rem;
-}
-pre,
-code {
-  background-color: #fafafa;
-}
-.secure-warning {
-  display: none;
-}
-.nav { margin:1rem 0; }
-.nav a { margin-right:0.5rem; }
-.responsive-iframe {
-  position: relative;
-  padding-bottom: 60%;
-  height: 0;
-  overflow: hidden;
-  border: 1px solid #ccc;
-}
-.responsive-iframe iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-.menu,label.theme {
-  cursor: pointer;
-}
-label.menu {
-  display: inline-block;
-  margin: 0.5rem 0;
-}
-#toggle-menu:checked ~ nav#menu { display: block; }
-nav#menu {
-  display: none;
-  border-bottom: 1px dashed #ccc;
-}
-nav#menu menu {
-  list-style: none;
-  margin: 1rem 0;
-  padding: 0;
-}
-</style>
+<!-- hidden checkboxes for future nav toggles -->
+<input type="checkbox" id="toggle-theme" hidden>
+<input type="checkbox" id="toggle-menu" hidden>
+<input type="checkbox" id="toggle-bottom" hidden>
+<input type="checkbox" id="toggle-left" hidden>
+<input type="checkbox" id="toggle-right" hidden>
 
-<!-- hidden checkboxes for toggles -->
-<input type=checkbox id=toggle-theme hidden>
-<input type=checkbox id=toggle-menu hidden>
-
-<h1>lvedx + ahoxus zenith</h1>
-<label class=menu for=toggle-menu>≡ menu</label>
-<nav id=menu>
-<label class=menu for=toggle-menu>✖ menu</label>
-<menu>
-<a href="#zenith-section">zenith</a>
-<a href="#about-lvedx">about lvedx</a>
-<a href="#contact">contact</a>
-</menu>
+<header>
+<h1>
+<a href="http://ahoxus.org/lved/x">
+<img src="logo🩷lved.svg" alt="🩷 Lved">
+lvedx spa/pwa
+</a>
+<label class="theme" for="toggle-theme" title="Toggle Theme"><p>🌗<p>🌚<p>🌝</label>
+</h1>
+<label class="menu" for="toggle-menu">≡ menu</label>
+<nav id="menu">
+  <label class="menu" for="toggle-menu">✖ menu</label>
+  <menu>
+    <a href="#dashboard">dashboard</a>
+    <a href="#circle">circle</a>
+    <a href="#assets">assets</a>
+    <a href="#wishes">wishes</a>
+    <a href="#docs">docs</a>
+    <a href="#contact">contact</a>
+  </menu>
 </nav>
 
-<section id=zenith-section>
-<h2>zenith web app</h2>
-<p>
-a minimal “pocket oracle”: ask your yes/no questions, get an answer. offline-first, random generator, no privacy illusions.
+<!-- placeholder UI to demonstrate future nav movement -->
+<div class="nav-placement">
+  <label for="toggle-bottom">bottom?</label>
+  <label for="toggle-left">left?</label>
+  <label for="toggle-right">right?</label>
+</div>
+</header>
 
-<div id="whole">
-<div id="answer"><img src="zenith_white.png" alt="𐅭"></div>
-<button id="zenith"><img src="zenith_white.png" alt="𐅭">zenith</button>
-<button id="hash">#</button>
+<main>
+
+<section id="dashboard" class="card-grid">
+<div class="card">
+<h3>dashboard</h3>
+<p>quick overview of lved updates, tasks, and notifications.
+</div>
+<div class="card">
+<h3>latest news</h3>
+<p>placeholder for dynamic content. combine personal data or public info.
+</div>
+<div class="card">
+<h3>next steps</h3>
+<p>we plan to add more features. stay tuned.
+</div>
+</section>
+
+<section id="circle">
+<h2>circle</h2>
+<p>manage and register your loved ones, key beneficiaries, or advisors. 
+<div class="card-grid">
+<div class="card"><p>invite people</div>
+<div class="card"><p>roles & permissions</div>
 </div>
 
-<button id="info">🪧</button>
-<div id="dialog_div" class="dialog"><div id="dialog_padding" class="dialog-padding"><div id="dialog_content" class="dialog-content">
-<span class="close">&times;</span>
-<h2>🌟 zenith: your pocket oracle 🔮</h2>
-<p>
-ask your question, relax your mind, and see the result. yes/no/don’t know or even random color or wiki. <a href="http://ahoxus.org/zenith">ahoxus.org/zenith</a>
+<section id="assets">
+<h2>assets</h2>
+<p>customize your legacy and assets in detail.
+<div class="card-grid">
+<div class="card"><p>properties</div>
+<div class="card"><p>digital assets</div>
+<div class="card"><p>business holdings</div>
+</div>
 
-<p>
-open source, no tracking, offline-friendly.
+<section id="wishes">
+<h2>wishes</h2>
+<p>set your preferences for the future, from healthcare to legacy instructions.
+<div class="card-grid">
+<div class="card"><p>health directives</div>
+<div class="card"><p>funeral plans</div>
+</div>
 
-</div></div></div>
-</section>
+<section id="docs">
+<h2>documentation</h2>
+<p>easily store relevant documents for quick access. keep them updated.
+<div class="card-grid">
+<div class="card"><p>legal forms</div>
+<div class="card"><p>estate plan pdf</div>
+<div class="card"><p>other uploads</div>
+</div>
 
-<section id=about-lvedx>
-<h2>about lvedx</h2>
-<p>this section merges troffhtml style with the classic lvedx approach. fully responsive and minimal. place your spa/pwa logic here.
-
-</section>
-
-<section id=contact>
-<h2>contact form</h2>
-<p>ask us anything or see the code to see if we care about privacy (spoiler: no).
+<section id="contact">
+<h2>contact us</h2>
+<p>for questions or suggestions, use the form:
 <form action="mailto:info@lved.com" method="post" enctype="text/plain">
-<input name="First name" placeholder="first name" autocomplete="name">
-<input name="Last name" placeholder="last name" autocomplete="given-name">
-<input name="Email" placeholder="email" type="email" autocomplete="email">
-<input name="Phone" placeholder="phone" autocomplete="mobile">
+<input name="First name" placeholder="first name">
+<input name="Last name" placeholder="last name">
+<input name="Email" type="email" placeholder="email">
+<input name="Phone" placeholder="phone">
 <textarea name="Message" placeholder="your message"></textarea>
 <input type="submit" value="send">
 </form>
-</section>
+
+</main>
 
 <footer>
-<p><label class=theme for=toggle-theme>🌗 toggle theme</label>
-<p><a href="mailto:info@lved.com">info@lved.com</a> – <a href="http://ahoxus.org/zenith">zenith</a>
+<p><label class="theme" for="toggle-theme" title="Toggle Theme"><p>🌗<p>🌚<p>🌝</label>
+<a href="mailto:info@lved.com">info@lved.com</a>
+ – <a href="#dashboard">back to top</a>
 </footer>
-
-<script>
-/* minimal zenith logic sample. adapt as needed. */
-const zbtn=document.getElementById('zenith')
-const ans=document.getElementById('answer')
-const infoBtn=document.getElementById('info')
-const dialog=document.getElementById('dialog_div')
-const dialogClose=document.querySelector('.close')
-zbtn.onclick=()=>{ ans.innerHTML=Math.random()>0.5?"yes":"no" }
-infoBtn.onclick=()=>dialog.style.display='block'
-dialogClose.onclick=()=>dialog.style.display='none'
-window.onclick=e=>{if(e.target===dialog)dialog.style.display='none'}
-</script>
-
