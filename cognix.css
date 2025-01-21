@@ -1,129 +1,158 @@
-/* subtle teal gradient background */
-html, body {
-  margin: 0; padding: 0;
+/* reset-ish */
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
   font-family: sans-serif;
   color: #222;
-  background: linear-gradient(120deg, #006a6b, #0fa3a5);
-  min-height: 100%;
+  background: #f0f0f0;
 }
 
-/* troffhtml style: minimal, no indentation, 
-   but a few classes for layout & theming */
+/* subtle teal gradient on body or container? up to you. */
+body {
+  background: linear-gradient(120deg, #006a6b, #0fa3a5);
+}
 
+/* main container for white background */
 main {
   max-width: 60rem;
-  margin: 0 auto;
-  padding: 0.5rem;
-  background: #fefefe;
+  margin: auto;
+  background: #fff;
+  padding: 1rem;
 }
 
-/* header & nav */
+/* header */
 header {
-  background: rgba(255,255,255,0.8);
-  padding: 0.5rem;
+  background: rgba(255,255,255,0.9);
   position: relative;
+  padding: 0.5rem 1rem;
 }
 header h1 {
-  display: flex;
-  align-items: center;
-  margin: 0;
+  display:flex;
+  align-items:center;
+  font-size:1.3rem;
+  margin:0;
 }
-header h1 a {
-  text-decoration: none;
-  color: #006a6b;
-  display: flex;
-  align-items: center;
+header .logo {
+  height:2rem;
+  margin-right:0.5rem;
 }
-header h1 img {
-  height: 2rem;
-  margin-right: 0.5rem;
+.theme-btn {
+  margin-left:auto;
+  cursor:pointer;
+  font-size:1.2rem;
 }
-label.theme {
-  cursor: pointer;
-  margin-left: auto;
+.top-nav {
+  margin-top:0.5rem;
+  display:flex;
+  align-items:center;
+  gap:1rem;
 }
-label.menu {
-  cursor: pointer;
-  display: inline-block;
-  margin: 1rem 0;
+.side-nav-toggle {
+  cursor:pointer;
+  font-size:1.3rem;
 }
-#menu {
-  display: none;
-  background: #fff;
-  padding: 0.5rem;
-  border-top: 1px dashed #ccc;
-}
-#toggle-menu:checked ~ header #menu {
-  display: block;
-}
-nav#menu menu {
-  list-style: none; 
-  margin: 0; 
-  padding: 0;
-}
-nav#menu menu a {
-  display: block;
-  padding: 0.25rem 0;
+.show-all-toggle {
+  cursor:pointer;
+  font-size:1.3rem;
 }
 
-/* placeholder toggles for moving nav, not implemented yet */
-.nav-placement {
-  font-size: 0.8rem;
-  margin: 0.5rem 0;
+/* side nav */
+.side-nav {
+  position: absolute;
+  top:4rem;
+  left:0;
+  width: 12rem;
+  background:#fff;
+  height: calc(100vh - 4rem);
+  overflow:auto;
+  border-right:1px solid #ccc;
+  padding:1rem;
+  display:none;
 }
-.nav-placement label {
-  cursor: pointer;
-  background: #eee;
-  border-radius: 0.25rem;
-  padding: 0.25rem;
-  margin: 0 0.25rem 0 0;
+.side-nav menu {
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+.side-nav menu li a {
+  display:block;
+  padding:0.5rem 0;
+  text-decoration:none;
+  color:#006a6b;
+  border-bottom:1px dashed #eee;
 }
 
-/* sections & headings */
-h2 {
-  font-size: 1.2rem;
-  margin: 1rem 0 0.5rem 0;
+/* checkbox toggles for side nav */
+#toggle-side:checked ~ .side-nav {
+  display:block;
 }
+
+/* card grid */
 .card-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  display:flex;
+  flex-wrap:wrap;
+  gap:1rem;
+  margin-bottom:1rem;
 }
 .card {
-  background: #fff;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-  padding: 1rem;
-  flex: 1 1 15rem; /* grows or shrinks, min 15rem */
+  background:#fff;
+  box-shadow:0 1px 4px rgba(0,0,0,0.15);
+  border-radius:0.4rem;
+  padding:1rem;
+  flex:1 1 16rem; 
 }
 
-/* form styling */
-form {
-  display: grid;
-  gap: 0.5rem;
-  margin: 1rem 0;
+/* form wrapping so it stays in container */
+.contact-wrap {
+  background:#f9f9f9;
+  padding:0.5rem;
+  margin:1rem 0;
+  box-shadow:0 1px 2px rgba(0,0,0,0.1);
 }
-form input, form textarea, form select {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
+form {
+  display:grid;
+  gap:0.5rem;
+}
+form input,form textarea {
+  width:100%;
+  padding:0.5rem;
+  border:1px solid #ccc;
+}
+form input[type=submit] {
+  cursor:pointer;
+}
+
+/* show/hide all sections toggle
+   if #toggle-all is checked, we ignore or override anything else,
+   but for now let's just do a simplistic approach: 
+   if not checked, hide everything except #dashboard
+*/
+section {
+  margin:1rem 0;
+  padding-bottom:1rem;
+  border-bottom:1px solid #eee;
+}
+#toggle-all:not(:checked) ~ main section:not(#dashboard) {
+  display:none;
+}
+
+/* theme toggle example. purely css for demonstration */
+#toggle-theme:checked ~ body,
+#toggle-theme:checked ~ main,
+#toggle-theme:checked ~ header,
+#toggle-theme:checked ~ footer {
+  filter: invert(0.9) hue-rotate(180deg);
 }
 
 /* footer */
 footer {
-  text-align: center;
-  font-size: 0.9rem;
-  background: rgba(255,255,255,0.8);
-  padding: 0.5rem;
-  margin-top: 1rem;
-}
-footer label.theme {
-  margin-right: 1rem;
-  cursor: pointer;
+  text-align:center;
+  background:rgba(255,255,255,0.9);
+  padding:0.5rem;
+  margin-top:1rem;
+  font-size:0.9rem;
 }
 footer a {
-  color: #006a6b;
+  color:#006a6b;
+  text-decoration:none;
+  margin:0 0.5rem;
 }
-
-/* no script or theme toggles implemented yet, just placeholders */
-
