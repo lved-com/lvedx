@@ -1,12 +1,14 @@
 <!doctype html><!-- #troffhtml -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>lvedx spa/pwa example</title>
-<link rel="stylesheet" href="lved.css?v=20250121Z0958">
+<title>lvedx spa/pwa</title>
+<link rel="stylesheet" href="lved.css?v=20250121Z1233">
+<meta name="theme-color" content="#025F60">
+<link rel="manifest" href="manifest.json?v=20250121Z1233">
 
-<!-- hidden toggles -->
+<!-- toggles -->
 <input type="checkbox" id="toggle-theme" hidden>
-<input type="checkbox" id="toggle-side" hidden>
+<input type="checkbox" id="toggle-menu" hidden>
 <input type="checkbox" id="toggle-all" hidden>
 
 <header>
@@ -15,47 +17,52 @@
       <img src="logo🩷lved.svg" alt="🩷 lved" class="logo">
       lvedx spa/pwa
     </a>
-    <!-- theme toggle on right -->
-    <label class="theme-btn" for="toggle-theme" title="toggle theme">🌗</label>
+    <label class="theme" for="toggle-theme" title="toggle theme">🌗</label>
   </h1>
 
-  <!-- top nav: no big text, just icons/labels -->
-  <nav class="top-nav">
-    <!-- show/hide side nav on small screens -->
-    <label class="side-nav-toggle" for="toggle-side" title="toggle side nav">≡</label>
-    <!-- show/hide all sections -->
-    <label class="show-all-toggle" for="toggle-all" title="show all sections">🌐</label>
+  <label class="menu" for="toggle-menu">≡ menu</label>
+  <nav id="menu">
+    <label class="menu" for="toggle-menu">✖ menu</label>
+    <menu>
+      <a href="#dashboard">dashboard</a>
+      <a href="#tasks">tasks</a>
+      <a href="#circle">circle</a>
+      <a href="#estate">estate</a>
+      <a href="#wishes">wishes</a>
+      <a href="#legacy">legacy</a>
+      <a href="#vault">digital vault</a>
+      <a href="#commitments">commitments</a>
+      <a href="#account">account</a>
+      <a href="#subscription">subscription</a>
+      <a href="#settings">settings & security</a>
+      <a href="#logout">logout</a>
+      <hr>
+      <!-- show/hide all sections toggle -->
+      <label for="toggle-all" title="show all sections">🌐 show all</label>
+    </menu>
   </nav>
 </header>
 
-<!-- side nav with anchor-based links -->
-<nav class="side-nav" id="side-nav">
-  <menu>
-    <li><a href="#dashboard">dashboard</a>
-    <li><a href="#tasks">tasks</a>
-    <li><a href="#circle">circle</a>
-    <li><a href="#estate">estate</a>
-    <li><a href="#wishes">wishes</a>
-    <li><a href="#legacy">legacy</a>
-    <li><a href="#vault">digital vault</a>
-    <li><a href="#commitments">commitments</a>
-    <li><a href="#account">account</a>
-    <li><a href="#subscription">subscription</a>
-    <li><a href="#settings">settings & security</a>
-    <li><a href="#logout">logout</a>
-  </menu>
-</nav>
-
 <main>
-  <!-- “all sections at once” logic:
-       If toggle-all is checked, everything is visible. 
-       Otherwise, each section can remain normal. 
-       For brevity, no fancy multi-page approach here. -->
+  <!-- single “dashboard” section. shown by default if toggle-all is not checked.
+       all other sections get hidden unless #toggle-all is checked.  -->
 
   <section id="dashboard" class="card-grid">
-    <div class="card"><h3>news</h3><p>recent happenings or announcements.</div>
-    <div class="card"><h3>updates</h3><p>any upcoming changes or revisions.</div>
-    <div class="card"><h3>tasks</h3><p>quick tasks overview.</div>
+    <div class="card">
+      <h3>news</h3>
+      <p>recent happenings or announcements
+      <a href="#tasks">see tasks</a>
+    </div>
+    <div class="card">
+      <h3>updates</h3>
+      <p>upcoming changes or new features
+      <a href="#subscription">view subscription</a>
+    </div>
+    <div class="card">
+      <h3>tasks</h3>
+      <p>quick tasks overview
+      <a href="#tasks">manage tasks</a>
+    </div>
   </section>
 
   <section id="tasks">
@@ -65,57 +72,57 @@
 
   <section id="circle">
     <h2>circle</h2>
-    <p>your beneficiaries, family, or advisors info.
+    <p>key beneficiaries, close contacts, or advisors
   </section>
 
   <section id="estate">
     <h2>estate</h2>
-    <p>properties, holdings, and all estate data.
+    <p>properties, holdings, and estate data
   </section>
 
   <section id="wishes">
     <h2>wishes</h2>
-    <p>future planning, health directives, funeral plans, etc.
+    <p>future directives, healthcare preferences, funeral ideas
   </section>
 
   <section id="legacy">
     <h2>legacy</h2>
-    <p>further instructions or philanthropic notes, if needed.
+    <p>philanthropic goals or personal statements
   </section>
 
   <section id="vault">
     <h2>digital vault</h2>
-    <p>passwords, documents, and other digital assets.
+    <p>upload or store docs and passwords
   </section>
 
   <section id="commitments">
     <h2>commitments</h2>
-    <p>loans, responsibilities, or anything important to keep track of.
+    <p>any outstanding obligations or responsibilities
   </section>
 
   <section id="account">
     <h2>account</h2>
-    <p>your lved account details.
+    <p>profile details, e-mail, name, etc.
   </section>
 
   <section id="subscription">
     <h2>subscription</h2>
-    <p>manage your plan, billing, upgrades/downgrades, etc.
+    <p>manage your plan or billing
   </section>
 
   <section id="settings">
     <h2>settings & security</h2>
-    <p>change password, set notifications, manage multi-factor authentication, etc.
+    <p>change password, set 2fa, notifications
   </section>
 
   <section id="logout">
     <h2>logout</h2>
-    <p>option to securely sign off and close your session.
+    <p>sign out safely
   </section>
 
   <section id="contact">
     <h2>contact form</h2>
-    <p>questions or suggestions? fill out:
+    <p>questions? fill out:
     <div class="contact-wrap">
       <form action="mailto:info@lved.com" method="post" enctype="text/plain">
         <input name="First name" placeholder="first name">
@@ -130,10 +137,8 @@
 </main>
 
 <footer>
-  <p>
-  <label class="theme-btn" for="toggle-theme" title="toggle theme">🌗</label>
-  <a href="#dashboard">back to top</a> 
-  | 
+  <label class="theme" for="toggle-theme" title="toggle theme">🌗</label>
+  <a href="#dashboard">back to top</a>
+  |
   <a href="mailto:info@lved.com">info@lved.com</a>
 </footer>
-
