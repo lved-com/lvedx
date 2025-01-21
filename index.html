@@ -3,35 +3,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>🩷 Lvedx dashboard</title>
 
-<link rel="stylesheet" href="lved.css?v=20250121Z1837">
-<script src="lved.js?v=20250121Z1837"></script>
+<link rel="stylesheet" href="lved.css?v=20250121Z2000">
+<script src="lved.js?v=20250121Z2000"></script>
 <meta name="theme-color" content="#025F60">
-<link rel="manifest" href="manifest.json?v=20250121Z1837">
+<link rel="manifest" href="manifest.json?v=20250121Z2000">
 
 <a id="all"></a> 
 <input type="checkbox" id="toggle-theme" hidden>
 
 <main>
 
-<h1><a href="http://ahoxus.org/lved/x"><img src="logo🩷lved.svg" alt="🩷 Lved">lvedx spa/pwa example</a><label class="theme" for="toggle-theme" title="Toggle Theme"><p>🌗<p>🌚<p>🌝</label></h1>
+<h1><a href="http://ahoxus.org/lved/x"><img src="logo🩷lved.svg" alt="🩷 Lved">Dashboard</a><label class="theme" for="toggle-theme" title="Toggle Theme"><p>🌗<p>🌚<p>🌝</label></h1>
 <input type="checkbox" id="toggle-menu" hidden>
-<label class="menu" for="toggle-menu">≡ menu</label>
+<label class="menu" for="toggle-menu">≡ Menu</label>
 
 <nav id="menu">
-<label class="menu" for="toggle-menu">✖ menu</label>
+<label class="menu" for="toggle-menu">✖ Menu</label>
 <menu>
-<a href="#home">home</a>
-<a href="#circle">circle</a>
-<a href="#assets">assets</a>
-<a href="#wishes">wishes</a>
-<a href="#docs">docs</a>
-<a href="#contact">contact</a>
+<a href="#home">Home</a>
+<a href="#vault">Digital Vault</a>
+<a href="#circle">Circle</a>
+<a href="#assets">Assets</a>
+<a href="#wishes">Wishes</a>
+<a href="#docs">Docs</a>
+<a href="#about">About</a>
+<a href="#help">Help</a>
 </menu>
 </nav>
 
 </main>
 
-<section id="top" TKclass="card-grid">
+<section id="top"><!-- class="card-grid" -->
 <div class="card">
 <h3>dashboard home</h3>
 <p>quick overview of lved updates, tasks, and notifications.
@@ -46,9 +48,19 @@
 </div>
 </section>
 
+<section id="vault">
+<h2><a href="#"># Digital Vault</a><label class="theme" for="toggle-theme" title="Toggle Theme"><p>🌗<p>🌚<p>🌝</label></h2>
+<p>(coming soon)
+Manage all you digital documents.
+<div class="card-grid">
+<div class="card">File Manager</div>
+</div>
+</section>
+
 <section id="circle">
-<h2>circle</h2>
-<p>manage and register your loved ones, key beneficiaries, or advisors. 
+<h2><a href="#"># Circle</a><label class="theme" for="toggle-theme" title="Toggle Theme"><p>🌗<p>🌚<p>🌝</label></h2>
+<p>(coming soon)
+Manage and register your loved ones, key beneficiaries, or advisors. 
 <div class="card-grid">
 <div class="card"><p>invite people</div>
 <div class="card"><p>roles & permissions</div>
@@ -56,8 +68,9 @@
 </section>
 
 <section id="assets">
-<h2>assets</h2>
-<p>customize your legacy and assets in detail.
+<h2><a href="#"># Assets</a><label class="theme" for="toggle-theme" title="Toggle Theme"><p>🌗<p>🌚<p>🌝</label></h2>
+<p>(coming soon)
+Customize your legacy and assets in detail.
 <div class="card-grid">
 <div class="card"><p>properties</div>
 <div class="card"><p>digital assets</div>
@@ -66,8 +79,9 @@
 </section>
 
 <section id="wishes">
-<h2>wishes</h2>
-<p>set your preferences for the future, from healthcare to legacy instructions.
+<h2><a href="#"># Wishes</a><label class="theme" for="toggle-theme" title="Toggle Theme"><p>🌗<p>🌚<p>🌝</label></h2>
+<p>(coming soon)
+set your preferences for the future, from healthcare to legacy instructions.
 <div class="card-grid">
 <div class="card"><p>health directives</div>
 <div class="card"><p>funeral plans</div>
@@ -75,8 +89,9 @@
 </section>
 
 <section id="docs">
-<h2>documentation</h2>
-<p>easily store relevant documents for quick access. keep them updated.
+<h2><a href="#"># Docs</a><label class="theme" for="toggle-theme" title="Toggle Theme"><p>🌗<p>🌚<p>🌝</label></h2>
+<p>(coming soon)
+easily store relevant documents for quick access. keep them updated.
 <div class="card-grid">
 <div class="card"><p>legal forms</div>
 <div class="card"><p>estate plan pdf</div>
@@ -85,7 +100,7 @@
 </section>
 
 <section id="about" class="parts">
-<h2><a href="#">🏠 about</a><label class="theme" for="toggle-theme" title="Toggle Theme"><p>🌗<p>🌚<p>🌝</label></h2>
+<h2><a href="#">🏠 About</a><label class="theme" for="toggle-theme" title="Toggle Theme"><p>🌗<p>🌚<p>🌝</label></h2>
 <p>
 small lorem ipsum
 <img src="happy.svg" alt="happy people">
@@ -113,25 +128,15 @@ Turning insights into action has driven our impact on clients and communities ov
 
 </section>
 
-<section id=newsletter>
-<h2><a href="#"># LVED Newsletter</a><label class="theme" for="toggle-theme" title="Toggle Theme"><p>🌗<p>🌚<p>🌝</label></h2>
-<p>
-<h4 class="text-white mb-0">✍️ Subscribe to <a href="lved.com">lved.com</a> Newsletter</h4>
-<form action="">
-<input type="text" id="emailInput" placeholder="Enter your email">
-<button type="submit" role="button">Subscribe</button>
-</form>
-</section>
-
-<section id="contact">
+<section id="help">
 <h2><a href="#"># Contact Form</a><label class="theme" for="toggle-theme" title="Toggle Theme"><p>🌗<p>🌚<p>🌝</label></h2>
-<p>How can we help?
-<form action="mailto:info@lved.com" method="post" enctype="text/plain">
+<p>Let us know how to find you
+<form action="mailto:help@lved.com" method="post" enctype="text/plain">
+<input name="Email" placeholder="Email" type="email" autocomplete="email@domain">
+
 <input name="First name" placeholder="First name" autocomplete="name">
 
 <input name="Last name" placeholder="Last name" autocomplete="given-name">
-
-<input name="Email" placeholder="Email" type="email" autocomplete="email">
 
 <input name="Phone" placeholder="Phone" autocomplete="mobile">
 
@@ -140,15 +145,17 @@ Turning insights into action has driven our impact on clients and communities ov
 Main Topic of Discussion
 <select name="Topic">
 <option>
-<option>Life Insurance
+<option>Digital Vault
+<option>Technical Issue
 <option>Other
 </select>
 
-Add any additional information that you feel could be relevant
+How can we help?
 <textarea name="Message"></textarea>
 
 <input type="submit" value="Send using default Email app">
 </form>
+
 If this form does not work, please copy your information and send it to the email below.
 
 <img src="touch.svg" alt="hand touching">
@@ -156,16 +163,16 @@ If this form does not work, please copy your information and send it to the emai
 
 <section id="sitemap">
 <h2><a href="#"># Sitemap</a><label class="theme" for="toggle-theme" title="Toggle Theme"><p>🌗<p>🌚<p>🌝</label></h2>
-<p>Under construction
+<p>(coming soon) 
 <p class="showonlyifscript">
-Meanwhile, you may see <a href="#all">all sections at once</a> without needing to disable javascript.
+Meanwhile, you may see <a href="#all">all sections at once here</a>.
 </section>
 
 <footer>
-<a href="mailto:info@lved.com">info@lved.com</a>
+<a href="mailto:help@lved.com">help@lved.com</a>
 
-<a href="#sitemap">sitemap</a>
+<a href="#sitemap">Sitemap</a>
 
 <div><label class="theme" for="toggle-theme" title="Toggle Theme"><p>🌗<p>🌚<p>🌝</label></div>
 
-<a href="https://github.com/lved-com/lvedx/blob/main/index.html">source 20250121Z1837
+<a href="https://github.com/lved-com/lvedx/blob/main/index.html">source 20250121Z2000

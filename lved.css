@@ -514,6 +514,9 @@ main nav label.menu { display: inline-block; }
 
 
 
+
+
+
 /* subtle teal gradient background */
 html, body {
   margin: 0; padding: 0;
@@ -523,8 +526,7 @@ html, body {
   min-height: 100%;
 }
 
-/* troffhtml style: minimal, no indentation, 
-   but a few classes for layout & theming */
+/* style for ahoxushtml */
 
 main {
   max-width: 60rem;
@@ -545,6 +547,7 @@ header h1 {
   margin: 0;
 }
 header h1 a {
+  text-decoration: none;
   color: #006a6b;
   display: flex;
   align-items: center;
@@ -556,27 +559,6 @@ header h1 img {
 label.theme {
   cursor: pointer;
   margin-left: auto;
-}
-label.menu {
-  cursor: pointer;
-  display: inline-block;
-  margin: 1rem 0;
-}
-#menu {
-  background: #fff;
-  padding: 0.5rem;
-  border-top: 1px dashed #ccc;
-}
-#toggle-menu:checked ~ header #menu {
-  display: block;
-}
-nav#menu menu {
-  margin: 0; 
-  padding: 0;
-}
-nav#menu menu a {
-  display: block;
-  padding: 0.25rem 0;
 }
 
 /* placeholder toggles for moving nav, not implemented yet */

@@ -29,11 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
   var themeCheckbox = document.getElementById('toggle-theme')
   var menuCheckbox = document.getElementById('toggle-menu')
 
-  // set default to show #all
-  if (! window.location.hash.replace('#','')) {
-    updateurl("#all")
-  }
-
   // show all text hidden for noscript
   var sois = document.getElementsByClassName('showonlyifscript')
   for (var i = 0; i < sois.length; i++) {
