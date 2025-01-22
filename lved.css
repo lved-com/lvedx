@@ -186,17 +186,16 @@ main h1 a {
   color: #eee;
 }
 
-main h1 a img {
-  vertical-align: middle; /* helps align with text baseline */
+h1 a img, nav a img {
+  padding: 0.5rem;
   max-height: 1.3em; /* scale image to roughly font-size of text */
 }
 
-nav a {
-  display: inline-block; /* breaks style below 100px */
-  color: #eee;
-  background-color: #131415;
-  border: 2px solid #777;
-  border-radius: 1000px;
+menu a {
+  display: block; /* inline-block would break style below 100px */
+  color: #000;
+  border-left: 4px solid transparent;
+  border-radius: 5px;
   font-weight: 600;
   font-size: clamp(0.5rem, 5vw, 1em);
   margin: 0.31rem;
@@ -204,7 +203,15 @@ nav a {
   padding: clamp(1px, 0.5em, 1rem);
   text-decoration: none;
 }
-nav a:hover, h2 a:hover {
+menu a:hover {
+  border-left: 4px solid #0a0;
+  background-color: linear-gradient(120deg, #006a6b, #0fa3a5);
+}
+menu a:active {
+  border-left: 4px solid #0c0;
+  background-color: linear-gradient(120deg, #006a6b, #0fa3a5);
+}
+h2 a:hover {
   color: #eee; 
 }
 
@@ -478,25 +485,25 @@ p.showonlyifscript {
 }
 
 /* "main label" will be the ≡ menu by default, and unused if css checked doesn't work */
-main label.menu {
+label.menu {
   display: none;
   padding: 1rem;
-  color: #eee;
-  background-color: #131415;
   width: fit-content;
   cursor: pointer; 
 }
-main nav label.menu { display: inline-block; }
+menu label.menu { display: block; }
+html body { margin-left: 199px; } /* broken hack to move it for now */
 
 @supports (selector(:checked)) {  
-  nav { display: block; }
+  menu { display: block; }
   /* for starting with menu closed
-  main label.menu { display: block; }
-  nav { display: none; }
+  label.menu { display: block; }
+  menu { display: none; }
      also need to modify the 2 toggle-menu lines below */
 
-  #toggle-menu:checked ~ nav { display: none; }
-  #toggle-menu:checked ~ label.menu { display: block; } /* handles just the less specific menu, outside of nav */
+  #toggle-menu:checked ~ menu { display: none; }
+  #toggle-menu:checked ~ label.menu { display: block; } /* handles just the less specific menu, outside of menu */
+  #toggle-menu:checked body { margin-left: 199px; } /* not working yet */
 
   /* pure css theme switch still does not work - only the label/button toggle */
   #toggle-theme:checked ~ label.theme p:nth-of-type(1) { display: none; }
@@ -622,3 +629,14 @@ footer a {
 
 /* no script or theme toggles implemented yet, just placeholders */
 
+nav#menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 199px; /* pick whatever you want */
+  height: 100vh; /* full vertical */
+  overflow-y: auto; /* scroll if needed */
+  background: #fff; /* or your color */
+  box-shadow: 2px 0 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease; /* smooth open/close */
+}
