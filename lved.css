@@ -40,7 +40,11 @@ html {
 body {
   margin: 0 auto;
   word-wrap: break-word;
-  max-width: 48rem; /* main content width */
+}
+
+main {
+  margin: 0.5em;
+  max-width: 48rem;
 }
 
 img {
@@ -145,7 +149,7 @@ a {
 /* FULL-BLEED NAV & FOOTER */
 nav#top, footer {
   display: block;
-  width: 100vw;
+  width: 99vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   box-sizing: border-box;
@@ -153,9 +157,8 @@ nav#top, footer {
 }
 
 nav#top {
-  background: linear-gradient(#131415, #333); /*, url('city.svg') top/cover no-repeat;*/
+  background: #fff; /*, url('city.svg') top/cover no-repeat;*/
   background-blend-mode: overlay;
-  border-bottom: 1px solid #444;
   backdrop-filter: blur(10px);
   text-align: center;
   padding-bottom: 1rem;
@@ -183,11 +186,11 @@ nav#top a, nav#top h1 a {
   border: 0;
   border-radius: 0;
   margin: 0;
-  color: #eee;
+  color: #555;
 }
 
 /* TK probably unnecessary, temp fix for nav top */
-nav#top img {
+span.logo {
   float: left;
 }
 nav#top menu, nav#top label.menu {
@@ -195,15 +198,22 @@ nav#top menu, nav#top label.menu {
   margin: 0;
   padding: 0;
 }
+nav#top label.menu {
+  margin-top: 0.4rem;
+  background-color: #fff;
+  color: #555;
+  border-radius: 10px;
+  box-shadow: 2px 0 6px rgba(0,0,0,0.1);
+}
 
 h1 a img, nav a img {
-  padding: 0.5rem;
+  padding: 0.2rem 0 0 0.2rem;
   max-height: 1.3em; /* scale image to roughly font-size of text */
 }
 
 menu a {
   display: block; /* inline-block would break style below 100px */
-  color: #000;
+  color: #555;
   border-left: 4px solid transparent;
   border-radius: 5px;
   font-weight: 600;
@@ -298,7 +308,7 @@ html[data-theme="dark"] {
 
 /* Force light theme */
 html[data-theme="light"] {
-  background: linear-gradient(180deg, #D0F0E4 100px, #F3F7F8 500px, #F6F8FA 100%);
+  background: linear-gradient(270deg, #D0F0E4 100px, #F3F7F8 500px, #F6F8FA 100%);
   color: #202122;
   --link-color: #000;
 }
@@ -498,8 +508,8 @@ p.showonlyifscript {
 label.menu {
   display: none;
   padding: 1rem;
-  width: fit-content;
   cursor: pointer; 
+  line-height: normal;
 }
 
 menu { display: block; }
@@ -512,8 +522,8 @@ menu { display: block; }
   menu { display: none; }
      also need to modify the 2 toggle-menu lines below */
 
-  #toggle-menu:checked ~ nav menu { display: block; }
-  #toggle-menu:checked ~ nav menu label.menu { display: none; }
+  #toggle-menu:checked ~ nav label.menu { display: none; }
+  #toggle-menu:checked ~ nav menu label.menu { display: block; }
 
   /* pure css theme switch does not work - only label/button toggle */
   #toggle-theme:checked ~ label.theme p:nth-of-type(1) { display: none; }
@@ -632,23 +642,38 @@ footer a {
   border-radius: 0.5rem;
   box-shadow: 0 1px 4px rgba(0,0,0,0.15);
   padding: 1rem;
+  margin: 1rem;
   flex: 1 1 15rem; /* grows or shrinks, min 15rem */
 }
 /* no script or theme toggles implemented yet, just placeholders */
 
+nav#top {
+  position: fixed;
+  top: 0.1rem;
+  left: 0.1rem;
+  width: 99vw;
+  height: 3.2rem;
+  overflow-x: clip;
+  border-radius: 10px;
+  box-shadow: 2px 0 6px rgba(0,0,0,0.1);
+}
 nav#menu {
   position: fixed;
-  top: 20vh;
-  left: 0;
-  width: 199px; /* pick whatever you want */
-  height: 100vh; /* full vertical */
-  overflow-y: auto; /* scroll if needed */
-  background: #fff; /* or your color */
+  top: 5rem;
+  left: 0.1rem;
+  width: 8em;
+  height: 85vh; /* full vertical */
+  overflow-y: clip;
+  background: #fff;
+  border-radius: 10px;
   box-shadow: 2px 0 6px rgba(0,0,0,0.1);
   transform: translateX(-100%);
 }
 body main, nav#menu {
   transition: transform 0.3s ease; /* smooth open/close */
+}
+body main {
+  margin-top: 5.5rem;
 }
 
 #toggle-menu:checked ~ nav#menu {
@@ -656,7 +681,7 @@ body main, nav#menu {
 }
 
   #toggle-menu:checked ~ main {
-    transform: translateX(199px);
-    width: calc(100vw - 199px);
+    transform: translateX(8em);
+    max-width: calc(99vw - 8em - 1em);
   } 
 
