@@ -143,7 +143,7 @@ a {
 }
 
 /* FULL-BLEED NAV & FOOTER */
-main, footer {
+nav#top, footer {
   display: block;
   width: 100vw;
   margin-left: calc(50% - 50vw);
@@ -152,8 +152,8 @@ main, footer {
   padding: clamp(0.1rem, 1vw, 1rem);
 }
 
-main {
-  background: linear-gradient(#131415, #333), url('city.svg') top/cover no-repeat;
+nav#top {
+  background: linear-gradient(#131415, #333); /*, url('city.svg') top/cover no-repeat;*/
   background-blend-mode: overlay;
   border-bottom: 1px solid #444;
   backdrop-filter: blur(10px);
@@ -163,7 +163,7 @@ main {
   word-break: normal;
 }
 
-main h1 {
+nav#top h1 {
   font-size: 1.3em; /* Increase text size slightly */
   font-weight: 800;
   color: #025F60;
@@ -177,13 +177,23 @@ main h1 {
   background: #131415;
 }
 
-main h1 a {
+nav#top a, nav#top h1 a {
   text-decoration: none;
   font-size: clamp(0.7rem, 6vw, 1.3em);
   border: 0;
   border-radius: 0;
   margin: 0;
   color: #eee;
+}
+
+/* TK probably unnecessary, temp fix for nav top */
+nav#top img {
+  float: left;
+}
+nav#top menu, nav#top label.menu {
+  color: #fff;
+  margin: 0;
+  padding: 0;
 }
 
 h1 a img, nav a img {
@@ -302,7 +312,7 @@ label.theme {
   background-clip: text;
   cursor: pointer;
 }
-main label.theme {
+nav#top label.theme {
   padding: 0.5rem;
 }
 label.theme p:nth-of-type(2), label.theme p:nth-of-type(3) {
@@ -484,28 +494,28 @@ p.showonlyifscript {
   }
 }
 
-/* "main label" will be the ≡ menu by default, and unused if css checked doesn't work */
+/* label menu will be hidden and unused if css checked doesn't work */
 label.menu {
   display: none;
   padding: 1rem;
   width: fit-content;
   cursor: pointer; 
 }
-menu label.menu { display: block; }
-html body { margin-left: 199px; } /* broken hack to move it for now */
+
+menu { display: block; }
 
 @supports (selector(:checked)) {  
-  menu { display: block; }
+  label.menu { display: block; }
+  menu label.menu { display: none; }
   /* for starting with menu closed
   label.menu { display: block; }
   menu { display: none; }
      also need to modify the 2 toggle-menu lines below */
 
-  #toggle-menu:checked ~ menu { display: none; }
-  #toggle-menu:checked ~ label.menu { display: block; } /* handles just the less specific menu, outside of menu */
-  #toggle-menu:checked body { margin-left: 199px; } /* not working yet */
+  #toggle-menu:checked ~ nav menu { display: block; }
+  #toggle-menu:checked ~ nav menu label.menu { display: none; }
 
-  /* pure css theme switch still does not work - only the label/button toggle */
+  /* pure css theme switch does not work - only label/button toggle */
   #toggle-theme:checked ~ label.theme p:nth-of-type(1) { display: none; }
   #toggle-theme:checked ~ label.theme p:nth-of-type(2) { display: block; }
 }
@@ -524,7 +534,7 @@ html body { margin-left: 199px; } /* broken hack to move it for now */
 
 
 
-/* subtle teal gradient background */
+/* subtle teal gradient background
 html, body {
   margin: 0; padding: 0;
   font-family: sans-serif;
@@ -533,7 +543,7 @@ html, body {
   min-height: 100%;
 }
 
-/* style for ahoxushtml */
+/* style for ahoxushtml
 
 main {
   max-width: 60rem;
@@ -542,7 +552,6 @@ main {
   background: #fefefe;
 }
 
-/* header & nav */
 header {
   background: rgba(255,255,255,0.8);
   padding: 0.5rem;
@@ -568,7 +577,7 @@ label.theme {
   margin-left: auto;
 }
 
-/* placeholder toggles for moving nav, not implemented yet */
+/* placeholder toggles for moving nav, not implemented yet 
 .nav-placement {
   font-size: 0.8rem;
   margin: 0.5rem 0;
@@ -581,25 +590,11 @@ label.theme {
   margin: 0 0.25rem 0 0;
 }
 
-/* sections & headings */
 h2 {
   font-size: 1.2rem;
   margin: 1rem 0 0.5rem 0;
 }
-.card-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-.card {
-  background: #fff;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-  padding: 1rem;
-  flex: 1 1 15rem; /* grows or shrinks, min 15rem */
-}
 
-/* form styling */
 form {
   display: grid;
   gap: 0.5rem;
@@ -611,7 +606,6 @@ form input, form textarea, form select {
   border: 1px solid #ccc;
 }
 
-/* footer */
 footer {
   text-align: center;
   font-size: 0.9rem;
@@ -626,17 +620,43 @@ footer label.theme {
 footer a {
   color: #006a6b;
 }
+*/
 
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.card {
+  background: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  padding: 1rem;
+  flex: 1 1 15rem; /* grows or shrinks, min 15rem */
+}
 /* no script or theme toggles implemented yet, just placeholders */
 
 nav#menu {
   position: fixed;
-  top: 0;
+  top: 20vh;
   left: 0;
   width: 199px; /* pick whatever you want */
   height: 100vh; /* full vertical */
   overflow-y: auto; /* scroll if needed */
   background: #fff; /* or your color */
   box-shadow: 2px 0 6px rgba(0,0,0,0.1);
+  transform: translateX(-100%);
+}
+body main, nav#menu {
   transition: transform 0.3s ease; /* smooth open/close */
 }
+
+#toggle-menu:checked ~ nav#menu {
+  transform: translateX(0);
+}
+
+  #toggle-menu:checked ~ main {
+    transform: translateX(199px);
+    width: calc(100vw - 199px);
+  } 
+
