@@ -1,16 +1,16 @@
 // ahoxus.js zenith
 function gatherEntropy() {
-    let entropy = performance.now()
-    entropy += Math.random()
-    entropy += Date.now()
-    entropy += window.screen.availHeight + window.screen.availWidth
-    entropy += (navigator.hardwareConcurrency || 4)
-    entropy += navigator.userAgent.length
-    return entropy
+  let entropy = performance.now()
+  entropy += Math.random()
+  entropy += Date.now()
+  entropy += window.screen.availHeight + window.screen.availWidth
+  entropy += (navigator.hardwareConcurrency || 4)
+  entropy += navigator.userAgent.length
+  return entropy
 }
 function rand(max) {
-    const entropy = gatherEntropy()
-    return Math.floor(entropy % max)
+  const entropy = gatherEntropy()
+  return Math.floor(entropy % max)
 }
 // emulate a zenith answer, with just 2 options
 function zenith() {
@@ -65,10 +65,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  function updateurl (hash = null, theme = null, qsmenu = null) {
+  function updateurl(hash = null, theme = null, qsmenu = null) {
     if (!hash) hash = window.location.hash
-    if (!theme) theme = themeCheckbox.checked ? "dark" : "light"
-    if (!qsmenu) qsmenu = menuCheckbox.checked ? "menu" : ""
+    if (!theme) theme = themeCheckbox && themeCheckbox.checked ? 'dark' : 'light'
+    if (!qsmenu) qsmenu = menuCheckbox && menuCheckbox.checked ? 'menu' : ''
     var newurlbase = window.location.pathname
     if (zenith() > 0) {
       newurlbase += '?' + theme + qsmenu
@@ -276,7 +276,7 @@ function openDB() {
     request.onupgradeneeded = (event) => {
       const upgradeDB = event.target.result
       if (!upgradeDB.objectStoreNames.contains(DB_STORE)) {
-        upgradeDB.createObjectStore(DB_STORE, { keyPath: 'id', autoIncrement: true })
+        upgradeDB.createObjectStore(DB_STORE, { keyPath:'id', autoIncrement:true })
       }
     }
     request.onsuccess = () => resolve(request.result)
@@ -319,7 +319,7 @@ async function retryEmails() {
         store.delete(email.id); // remove from queue on success
         console.log('Successfully resent queued email:', email)
       } catch (err) {
-        console.warn('Retry failed for queued email:', err)
+        console.warn('retry failed for queued email', err)
       }
     }
   }
@@ -333,31 +333,29 @@ async function retryEmails() {
 async function sendViaAjax(data) {
   // If "data.queued" is true, prefix the subject
   const subjectPrefix = data.queued ? '[AutoQueue] ' : ''
-  const subjectLine = `${subjectPrefix}Contact Form: ${data.name}`
+  const subjectLine = `${subjectPrefix}Contact Form: ${data.name || 'unnamed'}`
 
   // Build a FormData object with the keys Formspree will expect
   const formData = new FormData()
-  formData.append('name', data.name)
-  formData.append('email', data.email)
-  formData.append('message', data.message)
+  formData.append('name', data.name || '')
+  formData.append('email', data.email || '')
+  formData.append('message', data.message || '')
   formData.append('_subject', subjectLine)
 
   // Now do the Formspree fetch using FormData
   const response = await fetch('https://formspree.io/f/xlddodzp', {
-    method: 'POST',
-    headers: {
-      // No Content-Type needed; fetch auto-sets "multipart/form-data" for FormData
-      'Accept': 'application/json'
+    method:'POST',
+    headers:{
+      'Accept':'application/json'
     },
     body: formData
   })
 
-  // Check if request was successful
   if (response.ok) {
-    // Return the JSON (e.g. { "ok": true, ... })
     return await response.json()
   } else {
-    switchButtonStyles()
+    // do we need this here?
+    //switchButtonStyles()
     // If not OK, parse the error if possible, otherwise use a fallback
     let msg = 'Oops! There was a problem submitting your form.'
     try {
@@ -432,6 +430,7 @@ function displayMessage(text, type, infoElem = infoMsg) {
   infoElem.textContent = text
 }
 
+// useless function by now?
 function switchButtonStyles(submitButton, mailtoButton) {
   submitButton.classList.add('secondary')
   if (mailtoButton) mailtoButton.classList.remove('secondary')
@@ -489,6 +488,7 @@ async function handleSubmit(event, form, infoMsg, mailtoButton) {
     }
     if(mailtoButton) mailtoButton.style.display = 'none'
   } catch(err) {
+    // do we need this here?
     //switchButtonStyles()
     console.error('[lvedfn] formspree error:', err)
     if(infoMsg) {
