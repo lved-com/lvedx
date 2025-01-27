@@ -1,16 +1,16 @@
 // ahoxus.js zenith
 function gatherEntropy() {
-    let entropy = performance.now()
-    entropy += Math.random()
-    entropy += Date.now()
-    entropy += window.screen.availHeight + window.screen.availWidth
-    entropy += (navigator.hardwareConcurrency || 4)
-    entropy += navigator.userAgent.length
-    return entropy
+  let entropy = performance.now()
+  entropy += Math.random()
+  entropy += Date.now()
+  entropy += window.screen.availHeight + window.screen.availWidth
+  entropy += (navigator.hardwareConcurrency || 4)
+  entropy += navigator.userAgent.length
+  return entropy
 }
 function rand(max) {
-    const entropy = gatherEntropy()
-    return Math.floor(entropy % max)
+  const entropy = gatherEntropy()
+  return Math.floor(entropy % max)
 }
 // emulate a zenith answer, with just 2 options
 function zenith() {
@@ -28,11 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var themeCheckbox = document.getElementById('toggle-theme')
   var menuCheckbox = document.getElementById('toggle-menu')
-
-  // set default to show #all
-  if (! window.location.hash.replace('#','')) {
-    updateurl("#all")
-  }
 
   // show all text hidden for noscript
   var sois = document.getElementsByClassName('showonlyifscript')
@@ -70,10 +65,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  function updateurl (hash = null, theme = null, qsmenu = null) {
+  function updateurl(hash = null, theme = null, qsmenu = null) {
     if (!hash) hash = window.location.hash
-    if (!theme) theme = themeCheckbox.checked ? "dark" : "light"
-    if (!qsmenu) qsmenu = menuCheckbox.checked ? "menu" : ""
+    if (!theme) theme = themeCheckbox && themeCheckbox.checked ? 'dark' : 'light'
+    if (!qsmenu) qsmenu = menuCheckbox && menuCheckbox.checked ? 'menu' : ''
     var newurlbase = window.location.pathname
     if (zenith() > 0) {
       newurlbase += '?' + theme + qsmenu
@@ -258,35 +253,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
 
-
-// ahoxuscontactform.js
-const form = document.getElementById('emailForm')
-const submitButton = document.getElementById('submitButton')
-const mailtoButton = document.getElementById('mailtoButton')
-const infoMsg = document.getElementById('infoMsg')
-
-// Prevent repeated fallback triggers
-let usedFallback = false
-
-switchButtonTypes()
-
-function displayMessage(text, type) {
-  infoMsg.classList.remove('error', 'success')
-  infoMsg.classList.add(type)
-  infoMsg.textContent = text
-}
-
-function switchButtonStyles() {
-  submitButton.classList.add('secondary');
-  mailtoButton.classList.remove('secondary');
-  submitButton.style.display = 'block'
-}
-
-function switchButtonTypes() {
-  submitButton.setAttribute('type', 'button');
-  mailtoButton.setAttribute('type', 'submit');
-}
-
 // for later usage
 if (!navigator.onLine) {
   // We know the user is offline
@@ -310,7 +276,7 @@ function openDB() {
     request.onupgradeneeded = (event) => {
       const upgradeDB = event.target.result
       if (!upgradeDB.objectStoreNames.contains(DB_STORE)) {
-        upgradeDB.createObjectStore(DB_STORE, { keyPath: 'id', autoIncrement: true })
+        upgradeDB.createObjectStore(DB_STORE, { keyPath:'id', autoIncrement:true })
       }
     }
     request.onsuccess = () => resolve(request.result)
@@ -353,7 +319,7 @@ async function retryEmails() {
         store.delete(email.id); // remove from queue on success
         console.log('Successfully resent queued email:', email)
       } catch (err) {
-        console.warn('Retry failed for queued email:', err)
+        console.warn('retry failed for queued email', err)
       }
     }
   }
@@ -366,44 +332,42 @@ async function retryEmails() {
  */
 async function sendViaAjax(data) {
   // If "data.queued" is true, prefix the subject
-  const subjectPrefix = data.queued ? '[AutoQueue] ' : '';
-  const subjectLine = `${subjectPrefix}Contact Form: ${data.name}`;
+  const subjectPrefix = data.queued ? '[AutoQueue] ' : ''
+  const subjectLine = `${subjectPrefix}Contact Form: ${data.name || 'unnamed'}`
 
   // Build a FormData object with the keys Formspree will expect
-  const formData = new FormData();
-  formData.append('name', data.name);
-  formData.append('email', data.email);
-  formData.append('message', data.message);
-  formData.append('_subject', subjectLine);
+  const formData = new FormData()
+  formData.append('name', data.name || '')
+  formData.append('email', data.email || '')
+  formData.append('message', data.message || '')
+  formData.append('_subject', subjectLine)
 
   // Now do the Formspree fetch using FormData
   const response = await fetch('https://formspree.io/f/xlddodzp', {
-    method: 'POST',
-    headers: {
-      // No Content-Type needed; fetch auto-sets "multipart/form-data" for FormData
-      'Accept': 'application/json'
+    method:'POST',
+    headers:{
+      'Accept':'application/json'
     },
     body: formData
-  });
+  })
 
-  // Check if request was successful
   if (response.ok) {
-    // Return the JSON (e.g. { "ok": true, ... })
-    return await response.json();
+    return await response.json()
   } else {
-    switchButtonStyles()
+    // do we need this here?
+    //switchButtonStyles()
     // If not OK, parse the error if possible, otherwise use a fallback
-    let msg = 'Oops! There was a problem submitting your form.';
+    let msg = 'Oops! There was a problem submitting your form.'
     try {
-      const jsonErr = await response.json();
+      const jsonErr = await response.json()
       if (jsonErr.errors) {
         // Formspree often returns an "errors" array with messages
-        msg = jsonErr.errors.map(error => error.message).join(', ');
+        msg = jsonErr.errors.map(error => error.message).join(', ')
       }
     } catch (parseErr) {
       // If we fail to parse JSON, we'll stick to our fallback message
     }
-    throw new Error(msg);
+    throw new Error(msg)
   }
 }
 async function previoussendViaAjax(data) { // commented out
@@ -444,11 +408,11 @@ async function previoussendViaAjax(data) { // commented out
  * Fallback Logic
  * ---------------------------------------------------
  */
-function showFallbackButton() {
+function showFallbackButton(mailtoButton) {
   if (usedFallback) return; // Only unhide once
   usedFallback = true
 
-  mailtoButton.style.display = 'block'
+  if (mailtoButton) mailtoButton.style.display = 'block'
 }
 
 /**
@@ -456,6 +420,89 @@ function showFallbackButton() {
  * Main Initialization & Events
  * ---------------------------------------------------
  */
+
+// Prevent repeated fallback triggers
+let usedFallback = false
+
+function displayMessage(text, type, infoElem = infoMsg) {
+  infoElem.classList.remove('error','success')
+  infoElem.classList.add(type)
+  infoElem.textContent = text
+}
+
+// useless function by now?
+function switchButtonStyles(submitButton, mailtoButton) {
+  submitButton.classList.add('secondary')
+  if (mailtoButton) mailtoButton.classList.remove('secondary')
+  submitButton.style.display = 'block'
+}
+
+function switchButtonTypes(submitButton, mailtoButton) {
+  submitButton.setAttribute('type', 'button')
+  if (mailtoButton) mailtoButton.setAttribute('type', 'submit')
+}
+
+// ahoxuscontactform.js
+function initForms() {
+  const forms = document.querySelectorAll('form') // all forms on page
+  forms.forEach(form => {
+    // pick or create placeholders for "submit" button & "mailto" fallback if present
+    const submitButton = form.querySelector('input[type="submit"][id="submitButton"]') 
+                     || form.querySelector('button[id="submitButton"]')
+                     || form.querySelector('input[type="submit"]') 
+    const mailtoButton = form.querySelector('#mailtoButton')
+    const infoMsg      = form.querySelector('.infoMsg') 
+    // ^ or adapt the selector to how you’re labeling fallback elements in each form
+
+    showFallbackButton(mailtoButton)
+
+    switchButtonTypes(submitButton, mailtoButton)
+
+    if(!submitButton) return // no standard send button? skip
+    
+    submitButton.addEventListener('click', e => handleSubmit(e, form, infoMsg, mailtoButton))
+    if (mailtoButton) {
+      mailtoButton.addEventListener('click', async () => {
+        form.submit()
+      })
+    }
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault()
+    })
+  })
+}
+
+async function handleSubmit(event, form, infoMsg, mailtoButton) {
+  event.preventDefault()
+  event.stopPropagation()
+    // Clear old error?
+    //infoMsg.textContent = ''
+  // gather data
+  const formData = new FormData(form)
+  const data = Object.fromEntries(formData.entries())
+  try {
+    await sendViaAjax(data)
+    if(infoMsg) {
+      displayMessage(`Email sent via Formspree!`, 'success', infoMsg)
+    }
+    if(mailtoButton) mailtoButton.style.display = 'none'
+  } catch(err) {
+    // do we need this here?
+    //switchButtonStyles()
+    console.error('[lvedfn] formspree error:', err)
+    if(infoMsg) {
+      displayMessage(`Error: ${err.message}. You can try again or use the "Email Client" button.`, 'error', infoMsg)
+    }
+    // Save to IndexedDB for offline retry
+    try {
+      await saveToQueue(data)
+    } catch (dbErr) {
+      console.error('failed to save to IDB:', dbErr)
+    }
+  }
+}
+
 async function init() {
   try {
     await getDB()
@@ -463,51 +510,10 @@ async function init() {
     console.error('indexedDB initialization error:', err)
   }
 
-  showFallbackButton()
-
-  // Handle main "Send" button
-  submitButton.addEventListener('click', async (event) => {
-    event.preventDefault(); // Stop the form's default submission
-    event.stopPropagation(); // (Optional) Prevent further event bubbling
-
-    // Clear old error
-    infoMsg.textContent = ''
-
-    // Gather form data
-    const formData = new FormData(form)
-    const data = Object.fromEntries(formData.entries())
-
-    try {
-      // Attempt to send via Formspree
-      await sendViaAjax(data)
-      displayMessage(`Email sent successfully via Formspree!`, 'success')
-      // Optionally hide fallback if it was shown earlier
-      mailtoButton.style.display = 'none'
-
-    } catch (error) {
-      switchButtonStyles()
-      console.error('[lvedfn] formspree error:', error)
-      displayMessage(`Error: ${error.message}. You can try again or use the "Email Client" button.`, 'error')
-
-      // Save to IndexedDB for offline retry
-      try {
-        await saveToQueue(data)
-      } catch (dbErr) {
-        console.error('failed to save to IDB:', dbErr)
-      }
-    }
-  })
+  initForms()
 
   // Auto-retry queued messages when we come back online
   window.addEventListener('online', retryEmails)
-
-  mailtoButton.addEventListener('click', async () => {
-    form.submit()
-  })
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault()
-  })
 }
 
 init()

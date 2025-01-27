@@ -40,7 +40,11 @@ html {
 body {
   margin: 0 auto;
   word-wrap: break-word;
-  max-width: 48rem; /* main content width */
+}
+
+main {
+  margin: 0.5em;
+  max-width: 48rem;
 }
 
 img {
@@ -143,27 +147,27 @@ a {
 }
 
 /* FULL-BLEED NAV & FOOTER */
-main, footer {
+nav#top, footer {
   display: block;
-  width: 100vw;
+  width: 99vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   box-sizing: border-box;
   padding: clamp(0.1rem, 1vw, 1rem);
 }
 
-main {
-  background: linear-gradient(#131415, #333), url('city.svg') top/cover no-repeat;
+nav#top {
+  background: #fff; /*, url('city.svg') top/cover no-repeat;*/
   background-blend-mode: overlay;
-  border-bottom: 1px solid #444;
   backdrop-filter: blur(10px);
   text-align: center;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
   word-break: normal;
+  z-index: 999;
 }
 
-main h1 {
+nav#top h1 {
   font-size: 1.3em; /* Increase text size slightly */
   font-weight: 800;
   color: #025F60;
@@ -177,26 +181,43 @@ main h1 {
   background: #131415;
 }
 
-main h1 a {
+nav#top a, nav#top h1 a {
   text-decoration: none;
   font-size: clamp(0.7rem, 6vw, 1.3em);
   border: 0;
   border-radius: 0;
   margin: 0;
-  color: #eee;
+  color: #555;
 }
 
-main h1 a img {
-  vertical-align: middle; /* helps align with text baseline */
+/* TK probably unnecessary, temp fix for nav top */
+span.logo {
+  float: left;
+  position: relative; /* so z-index or layering can apply if needed */
+}
+nav#top menu, nav#top label.menu {
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+nav#top label.menu {
+  margin-top: 0.4rem;
+  background-color: #fff;
+  color: #555;
+  border-radius: 10px;
+  box-shadow: 2px 0 6px rgba(0,0,0,0.1);
+}
+
+h1 a img, nav a img {
+  padding: 0.2rem 0 0 0.2rem;
   max-height: 1.3em; /* scale image to roughly font-size of text */
 }
 
-nav a {
-  display: inline-block; /* breaks style below 100px */
-  color: #eee;
-  background-color: #131415;
-  border: 2px solid #777;
-  border-radius: 1000px;
+menu a {
+  display: block; /* inline-block would break style below 100px */
+  color: #555;
+  border-left: 4px solid transparent;
+  border-radius: 5px;
   font-weight: 600;
   font-size: clamp(0.5rem, 5vw, 1em);
   margin: 0.31rem;
@@ -204,7 +225,15 @@ nav a {
   padding: clamp(1px, 0.5em, 1rem);
   text-decoration: none;
 }
-nav a:hover, h2 a:hover {
+menu a:hover {
+  border-left: 4px solid #0a0;
+  background-color: linear-gradient(120deg, #006a6b, #0fa3a5);
+}
+menu a:active {
+  border-left: 4px solid #0c0;
+  background-color: linear-gradient(120deg, #006a6b, #0fa3a5);
+}
+h2 a:hover {
   color: #eee; 
 }
 
@@ -281,7 +310,7 @@ html[data-theme="dark"] {
 
 /* Force light theme */
 html[data-theme="light"] {
-  background: linear-gradient(180deg, #D0F0E4 100px, #F3F7F8 500px, #F6F8FA 100%);
+  background: linear-gradient(270deg, #D0F0E4 100px, #F3F7F8 500px, #F6F8FA 100%);
   color: #202122;
   --link-color: #000;
 }
@@ -295,7 +324,7 @@ label.theme {
   background-clip: text;
   cursor: pointer;
 }
-main label.theme {
+nav#top label.theme {
   padding: 0.5rem;
 }
 label.theme p:nth-of-type(2), label.theme p:nth-of-type(3) {
@@ -477,28 +506,28 @@ p.showonlyifscript {
   }
 }
 
-/* "main label" will be the ≡ menu by default, and unused if css checked doesn't work */
-main label.menu {
+/* label menu will be hidden and unused if css checked doesn't work */
+label.menu {
   display: none;
   padding: 1rem;
-  color: #eee;
-  background-color: #131415;
-  width: fit-content;
   cursor: pointer; 
+  line-height: normal;
 }
-main nav label.menu { display: inline-block; }
+
+menu { display: block; }
 
 @supports (selector(:checked)) {  
-  nav { display: block; }
+  label.menu { display: block; }
+  menu label.menu { display: none; }
   /* for starting with menu closed
-  main label.menu { display: block; }
-  nav { display: none; }
+  label.menu { display: block; }
+  menu { display: none; }
      also need to modify the 2 toggle-menu lines below */
 
-  #toggle-menu:checked ~ nav { display: none; }
-  #toggle-menu:checked ~ label.menu { display: block; } /* handles just the less specific menu, outside of nav */
+  #toggle-menu:checked ~ nav label.menu { display: none; }
+  #toggle-menu:checked ~ nav menu label.menu { display: block; }
 
-  /* pure css theme switch still does not work - only the label/button toggle */
+  /* pure css theme switch does not work - only label/button toggle */
   #toggle-theme:checked ~ label.theme p:nth-of-type(1) { display: none; }
   #toggle-theme:checked ~ label.theme p:nth-of-type(2) { display: block; }
 }
@@ -514,7 +543,10 @@ main nav label.menu { display: inline-block; }
 
 
 
-/* subtle teal gradient background */
+
+
+
+/* subtle teal gradient background
 html, body {
   margin: 0; padding: 0;
   font-family: sans-serif;
@@ -523,8 +555,7 @@ html, body {
   min-height: 100%;
 }
 
-/* troffhtml style: minimal, no indentation, 
-   but a few classes for layout & theming */
+/* style for ahoxushtml
 
 main {
   max-width: 60rem;
@@ -533,7 +564,6 @@ main {
   background: #fefefe;
 }
 
-/* header & nav */
 header {
   background: rgba(255,255,255,0.8);
   padding: 0.5rem;
@@ -545,6 +575,7 @@ header h1 {
   margin: 0;
 }
 header h1 a {
+  text-decoration: none;
   color: #006a6b;
   display: flex;
   align-items: center;
@@ -557,29 +588,8 @@ label.theme {
   cursor: pointer;
   margin-left: auto;
 }
-label.menu {
-  cursor: pointer;
-  display: inline-block;
-  margin: 1rem 0;
-}
-#menu {
-  background: #fff;
-  padding: 0.5rem;
-  border-top: 1px dashed #ccc;
-}
-#toggle-menu:checked ~ header #menu {
-  display: block;
-}
-nav#menu menu {
-  margin: 0; 
-  padding: 0;
-}
-nav#menu menu a {
-  display: block;
-  padding: 0.25rem 0;
-}
 
-/* placeholder toggles for moving nav, not implemented yet */
+/* placeholder toggles for moving nav, not implemented yet 
 .nav-placement {
   font-size: 0.8rem;
   margin: 0.5rem 0;
@@ -592,25 +602,11 @@ nav#menu menu a {
   margin: 0 0.25rem 0 0;
 }
 
-/* sections & headings */
 h2 {
   font-size: 1.2rem;
   margin: 1rem 0 0.5rem 0;
 }
-.card-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-.card {
-  background: #fff;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-  padding: 1rem;
-  flex: 1 1 15rem; /* grows or shrinks, min 15rem */
-}
 
-/* form styling */
 form {
   display: grid;
   gap: 0.5rem;
@@ -622,7 +618,6 @@ form input, form textarea, form select {
   border: 1px solid #ccc;
 }
 
-/* footer */
 footer {
   text-align: center;
   font-size: 0.9rem;
@@ -637,6 +632,56 @@ footer label.theme {
 footer a {
   color: #006a6b;
 }
+*/
 
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.card {
+  background: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  padding: 1rem;
+  margin: 1rem;
+  flex: 1 1 15rem; /* grows or shrinks, min 15rem */
+}
 /* no script or theme toggles implemented yet, just placeholders */
+
+nav#top {
+  position: fixed;
+  top: 0.1rem;
+  left: 0.1rem;
+  width: 99vw;
+  height: 3.2rem;
+  overflow-x: clip;
+  border-radius: 10px;
+  box-shadow: 2px 0 6px rgba(0,0,0,0.1);
+}
+nav#menu {
+  position: fixed;
+  top: -0.1rem;
+  left: 0.1rem;
+  width: 8em;
+  height: 85vh; /* full vertical */
+  overflow-y: clip;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 2px 0 6px rgba(0,0,0,0.1);
+  transform: translateX(-100%);
+}
+nav#menu, body main {
+  transition: transform 0.3s ease; /* smooth open/close */
+  margin-top: 5.5rem;
+}
+
+#toggle-menu:checked ~ nav#menu {
+  transform: translateX(0);
+}
+
+  #toggle-menu:checked ~ main {
+    transform: translateX(8em);
+    max-width: calc(99vw - 8em - 1em);
+  } 
 
