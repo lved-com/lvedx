@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
 /*
- * kept all this to help creating fallbacks, soon enough
+ * kept all this to help creating fallbacks
  *
   // theme logic
   var htmlel = document.documentelement
@@ -255,10 +255,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // for later usage
 if (!navigator.onLine) {
-  // We know the user is offline
+  // we know the user stands offline
   // e.g. show fallback UI or queue automatically
 } else {
-  // Try Formspree fetch
+  // fetch something
 }
 
 /**
@@ -327,7 +327,7 @@ async function retryEmails() {
 
 /**
  * ---------------------------------------------------
- * Sending Logic (Formspree)
+ * Sending Logic (ajax form)
  * ---------------------------------------------------
  */
 async function sendViaAjax(data) {
@@ -335,14 +335,14 @@ async function sendViaAjax(data) {
   const subjectPrefix = data.queued ? '[AutoQueue] ' : ''
   const subjectLine = `${subjectPrefix}Contact Form: ${data.name || 'unnamed'}`
 
-  // Build a FormData object with the keys Formspree will expect
+  // Build a FormData object with the keys ajax form will expect
   const formData = new FormData()
   formData.append('name', data.name || '')
   formData.append('email', data.email || '')
   formData.append('message', data.message || '')
   formData.append('_subject', subjectLine)
 
-  // Now do the Formspree fetch using FormData
+  // to replace 
   const response = await fetch('https://formspree.io/f/xlddodzp', {
     method:'POST',
     headers:{
@@ -361,7 +361,7 @@ async function sendViaAjax(data) {
     try {
       const jsonErr = await response.json()
       if (jsonErr.errors) {
-        // Formspree often returns an "errors" array with messages
+        // form ajax often returns an "errors" array with messages
         msg = jsonErr.errors.map(error => error.message).join(', ')
       }
     } catch (parseErr) {
@@ -397,7 +397,7 @@ async function previoussendViaAjax(data) { // commented out
     } catch (jsonErr) {
       // ignore parse error, fallback to generic below as jsonErr don't matter to us
     }
-    throw new Error(errorBody.error || 'failed to send via Formspree')
+    throw new Error(errorBody.error || 'failed to send via ajax')
   }
 
   return response.json()
@@ -484,13 +484,13 @@ async function handleSubmit(event, form, infoMsg, mailtoButton) {
   try {
     await sendViaAjax(data)
     if(infoMsg) {
-      displayMessage(`Email sent via Formspree!`, 'success', infoMsg)
+      displayMessage(`Email sent via formspree!`, 'success', infoMsg)
     }
     if(mailtoButton) mailtoButton.style.display = 'none'
   } catch(err) {
     // do we need this here?
     //switchButtonStyles()
-    console.error('[lvedfn] formspree error:', err)
+    console.error('[lvedx] ajax error:', err)
     if(infoMsg) {
       displayMessage(`Error: ${err.message}. You can try again or use the "Email Client" button.`, 'error', infoMsg)
     }

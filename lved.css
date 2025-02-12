@@ -679,9 +679,9 @@ nav#menu, body main {
 #toggle-menu:checked ~ nav#menu {
   transform: translateX(0);
 }
+#toggle-menu:checked ~ main {
+  transform: translateX(8em);
+  max-width: calc(99vw - 8em - 1em);
+} 
 
-  #toggle-menu:checked ~ main {
-    transform: translateX(8em);
-    max-width: calc(99vw - 8em - 1em);
-  } 
-
+body:has(:target:not(#home)) #home { display: none; }
