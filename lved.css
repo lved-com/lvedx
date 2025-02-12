@@ -540,7 +540,7 @@ menu { display: block; }
 @supports (selector(:target)) {
   section { display: none; }
   section:nth-of-type(1) { display: block; }
-  body:has(:target:not(section:nth-of-type(1))) section.parts:nth-of-type(1) { display: none; }
+  body:has(#all:target) section { display: block; }
   section:target { display: block; }
 
   #all:target ~ section { display: block; }
@@ -691,3 +691,4 @@ nav#menu, body main {
 } 
 
 body:has(:target:not(#home)) #home { display: none; }
+
