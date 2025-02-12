@@ -29,6 +29,13 @@ document.addEventListener('DOMContentLoaded', function() {
   var themeCheckbox = document.getElementById('toggle-theme')
   var menuCheckbox = document.getElementById('toggle-menu')
 
+  // if query is empty or just '?', force '?menu' and open menu by default
+  if (!initialqs || initialqs === '?' || initialqs === '?#') {
+    var newurl = '?menu' + window.location.hash
+    window.history.replaceState(null, '', newurl)
+    initialqs = '?menu'
+  }
+ 
   // show all text hidden for noscript
   var sois = document.getElementsByClassName('showonlyifscript')
   for (var i = 0; i < sois.length; i++) {

@@ -202,7 +202,6 @@ nav#top menu, nav#top label.menu {
 }
 nav#top label.menu {
   margin-top: 0.4rem;
-  background-color: #fff;
   color: #555;
   border-radius: 10px;
   box-shadow: 2px 0 6px rgba(0,0,0,0.1);
@@ -299,6 +298,9 @@ aside {
     background: #202122;
     color: #d0f0e4;
   }
+  .card, nav#top, nav#menu {
+    background: #333333;
+  }
 }
 
 /* Force dark theme */
@@ -306,6 +308,9 @@ html[data-theme="dark"] {
   background: #202122;
   color: #d0f0e4;
   --link-color: #eee;
+}
+html[data-theme="dark"] .card, html[data-theme="dark"] nav#top, html[data-theme="dark"] nav#menu {
+  background: #333333;
 }
 
 /* Force light theme */
@@ -656,6 +661,7 @@ nav#top {
   width: 99vw;
   height: 3.2rem;
   overflow-x: clip;
+  background: #fff;
   border-radius: 10px;
   box-shadow: 2px 0 6px rgba(0,0,0,0.1);
 }
